@@ -4,9 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run test:base -- --exit",
+    "test:base": "mocha --require jiti/register --file test/setup.ts test/**/*.spec.ts",
+    "test:report": "npm run --silent test:base -- --exit --reporter json > test-results.json",
+    "test:watch": "npm run test:base -- --watch --watch-files test/**/*.ts,src/**/*.ts"
+  },
+  "imports": {
+    "#src/*": "./src/*"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.3.3",
+    "@types/chai-as-promised": "^7.1.5",
+    "@types/mocha": "^9.1.1",
+    "@types/sinon": "^10.0.13",
+    "chai": "^4.3.6",
+    "chai-as-promised": "^7.1.1",
+    "jiti": "^1.15.0",
+    "mocha": "^10.0.0",
+    "sinon": "^14.0.0",
+    "typescript": "^4.8.3"
+  }
 }

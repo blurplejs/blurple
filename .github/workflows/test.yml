@@ -1,0 +1,35 @@
+name: Test
+
+on:
+  push:
+    paths:
+      - 'runtime/**'
+
+jobs:
+  test-runtime:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: runtime
+    steps:
+      - uses: actions/checkout@v3
+      
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.9.4
+          
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Test runtime
+        run: pnpm test:report
+
+      - uses: actions/upload-artifact@v2  # upload test results
+        if: success() || failure()        # run this step even if previous step failed
+        with:
+          name: runtime-test-results
+          path: runtime/test-results.json
