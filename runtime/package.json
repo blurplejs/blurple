@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
     "test": "npm run test:base -- --exit",
     "test:base": "mocha --require jiti/register --file test/setup.ts test/**/*.spec.ts",
     "test:report": "npm run --silent test:base -- --exit --reporter json > test-results.json",
@@ -25,6 +26,13 @@
     "jiti": "^1.15.0",
     "mocha": "^10.0.0",
     "sinon": "^14.0.0",
-    "typescript": "^4.8.3"
+    "typescript": "^4.8.3",
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0",
+    "eslint": "^8.23.1",
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.5",
+    "eslint-plugin-promise": "^6.0.1"
   }
 }

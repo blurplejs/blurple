@@ -1,8 +1,6 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "moduleResolution": "node",
-    "target": "es2020",
-    "esModuleInterop": true,
     "paths": {
       "#src/*": ["./src/*"]
     }

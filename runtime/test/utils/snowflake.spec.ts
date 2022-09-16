@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import sinon from 'sinon'
 import Snowflake from '#src/utils/snowflake.ts'
 
-let clock: sinon.SinonFakeTimers 
+let clock: sinon.SinonFakeTimers
 beforeEach(() => {
   clock = sinon.useFakeTimers({ now: Date.UTC(2016, 3, 30, 11, 18, 25, 796) })
   Snowflake.INCREMENT_COUNTER = 0
@@ -21,7 +21,7 @@ describe('Snowflakes', () => {
 
   it('returns its timestamp', () => {
     const snowflake = new Snowflake()
-    
+
     // Taken from the Discord snowflake documentation example
     expect(snowflake.timestamp).to.equal(41944705796)
   })
@@ -47,17 +47,13 @@ describe('Snowflakes', () => {
   })
 
   it('returns its increment for the first snowflake', () => {
-    
-
     const snowflake = new Snowflake()
 
     expect(snowflake.increment).to.equal(1)
   })
 
   it('returns its increment for the second snowflake', () => {
-    Snowflake.INCREMENT_COUNTER = 0
-
-    new Snowflake()
+    Snowflake.INCREMENT_COUNTER++
     const snowflake = new Snowflake()
 
     expect(snowflake.increment).to.equal(2)

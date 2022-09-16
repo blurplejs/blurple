@@ -7,6 +7,7 @@ on:
 
 jobs:
   test-runtime:
+    name: Test the runtime
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -24,6 +25,9 @@ jobs:
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile
+
+      - name: Lint runtime
+        run: pnpm lint
 
       - name: Test runtime
         run: pnpm test:report
