@@ -43,4 +43,12 @@ export default class Snowflake {
 
     return BigInt.asUintN(64, value)
   }
+
+  /**
+   * Returns the Snowflake descriptor as a string so that it can be transmitted
+   * as a string to clients that might not support 64-bit integers.
+   */
+  public toString (): string {
+    return this.descriptor.toString(10)
+  }
 }

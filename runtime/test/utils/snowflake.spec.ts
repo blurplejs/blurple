@@ -60,28 +60,37 @@ describe('Snowflake', () => {
   })
 
   describe('.descriptor', () => {
-    it('can retrieve the timestamp', () => {
+    it('includes the timestamp in the correct position', () => {
       const snowflake = new Snowflake().descriptor
 
       expect((snowflake >> 22n) + BigInt(Snowflake.DISCORD_EPOCH)).to.equal(1462015105796n)
     })
 
-    it('can retrieve the internal worker id', () => {
+    it('includes the internal worker id in the correct position', () => {
       const snowflake = new Snowflake(3, 5).descriptor
 
       expect((snowflake & 0x3E0000n) >> 17n).to.equal(3n)
     })
 
-    it('can retrieve the internal process id', () => {
+    it('includes the internal process id in the correct position', () => {
       const snowflake = new Snowflake(3, 5).descriptor
 
       expect((snowflake & 0x1F000n) >> 12n).to.equal(5n)
     })
 
-    it('can retrieve the increment', () => {
+    it('includes the increment in the correct position', () => {
       const snowflake = new Snowflake(3, 5).descriptor
 
       expect(snowflake & 0xFFFn).to.equal(1n)
+    })
+  })
+
+  describe('.toString()', () => {
+    it('returns the descriptor as a string', () => {
+      const snowflake = new Snowflake(1, 0)
+      snowflake.increment = 7
+
+      expect(snowflake.toString()).to.be.equal('175928847299117063')
     })
   })
 })
