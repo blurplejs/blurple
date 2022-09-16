@@ -13,7 +13,7 @@ afterEach(() => {
   clock.restore()
 })
 
-describe('Snowflakes', () => {
+describe('Snowflake', () => {
   it('can be constructed', () => {
     const snowflake = new Snowflake()
     expect(snowflake).to.be.an('object')

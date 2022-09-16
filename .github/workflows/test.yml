@@ -36,4 +36,6 @@ jobs:
         if: success() || failure()        # run this step even if previous step failed
         with:
           name: runtime-test-results
-          path: runtime/test-results.json
+          path: |
+            runtime/coverage/**/*
+            runtime/test-results.json

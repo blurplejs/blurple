@@ -1,4 +1,4 @@
-name: 'Test Report'
+name: Report test results
 
 on:
   workflow_run:
@@ -10,9 +10,26 @@ jobs:
   report:
     runs-on: ubuntu-latest
     steps:
-    - uses: dorny/test-reporter@v1
-      with:
-        artifact: runtime-test-results
-        name: Runtime test results
-        path: '*.json'
-        reporter: mocha-json
+      - uses: dorny/test-reporter@v1
+        with:
+          artifact: runtime-test-results
+          name: Runtime test results
+          path: '**/test-results.json'
+          reporter: mocha-json
+  
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: dawidd6/action-download-artifact@v2
+        with:
+          run_id: ${{ github.event.workflow_run.id }}
+          path: runtime
+          name: runtime-test-results
+
+      - uses: codecov/codecov-action@v3
+        with:
+          directory: runtime
+          flags: runtimetests
+          name: runtime-test-coverage

@@ -6,12 +6,18 @@
   "scripts": {
     "lint": "eslint .",
     "test": "npm run test:base -- --exit",
+    "coverage": "codecov",
     "test:base": "mocha --require jiti/register --file test/setup.ts test/**/*.spec.ts",
-    "test:report": "npm run --silent test:base -- --exit --reporter json > test-results.json",
+    "test:report": "nyc npm run --silent test:base -- --exit --reporter json > test-results.json",
     "test:watch": "npm run test:base -- --watch --watch-files test/**/*.ts,src/**/*.ts"
   },
   "imports": {
     "#src/*": "./src/*"
+  },
+  "nyc": {
+    "reporter": [
+      "nyc-report-lcov-absolute"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -21,18 +27,21 @@
     "@types/chai-as-promised": "^7.1.5",
     "@types/mocha": "^9.1.1",
     "@types/sinon": "^10.0.13",
-    "chai": "^4.3.6",
-    "chai-as-promised": "^7.1.1",
-    "jiti": "^1.15.0",
-    "mocha": "^10.0.0",
-    "sinon": "^14.0.0",
-    "typescript": "^4.8.3",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
+    "chai": "^4.3.6",
+    "chai-as-promised": "^7.1.1",
+    "codecov": "^3.8.3",
     "eslint": "^8.23.1",
     "eslint-config-standard-with-typescript": "^23.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.2.5",
-    "eslint-plugin-promise": "^6.0.1"
+    "eslint-plugin-promise": "^6.0.1",
+    "jiti": "^1.15.0",
+    "mocha": "^10.0.0",
+    "nyc": "^15.1.0",
+    "nyc-report-lcov-absolute": "^1.0.0",
+    "sinon": "^14.0.0",
+    "typescript": "^4.8.3"
   }
 }
