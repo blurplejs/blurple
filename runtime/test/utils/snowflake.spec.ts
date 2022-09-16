@@ -1,7 +1,7 @@
 import { describe } from 'mocha'
 import { expect } from 'chai'
 import sinon from 'sinon'
-import Snowflake from '#src/utils/snowflake.ts'
+import Snowflake from '#src/utils/snowflake'
 
 let clock: sinon.SinonFakeTimers
 beforeEach(() => {

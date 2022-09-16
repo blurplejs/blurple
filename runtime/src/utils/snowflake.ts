@@ -35,7 +35,7 @@ export default class Snowflake {
    *
    * @return A 64-bit integer representing the unique identifier of this Snowflake
    */
-  get descriptor (): BigInt {
+  get descriptor (): bigint {
     const value = BigInt(this.increment) +
                   (BigInt(this.internalProcessID) << 12n) +
                   (BigInt(this.internalWorkerID) << 17n) +

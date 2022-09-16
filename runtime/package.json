@@ -7,12 +7,12 @@
     "lint": "eslint .",
     "test": "npm run test:base -- --exit",
     "coverage": "codecov",
-    "test:base": "mocha --require jiti/register --file test/setup.ts test/**/*.spec.ts",
+    "test:base": "mocha --file test/setup.ts",
     "test:report": "nyc npm run --silent test:base -- --exit --reporter json > test-results.json",
     "test:watch": "npm run test:base -- --watch --watch-files test/**/*.ts,src/**/*.ts"
   },
   "imports": {
-    "#src/*": "./src/*"
+    "#src/*": "./src/*.ts"
   },
   "nyc": {
     "reporter": [
@@ -42,6 +42,7 @@
     "nyc": "^15.1.0",
     "nyc-report-lcov-absolute": "^1.0.0",
     "sinon": "^14.0.0",
+    "ts-node": "^10.9.1",
     "typescript": "^4.8.3"
   }
 }
