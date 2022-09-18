@@ -1,19 +1,19 @@
 import { describe } from 'mocha'
 import { expect } from 'chai'
 import sinon from 'sinon'
-import SnowflakeRepository from '#src/utils/snowflakeRepository'
+import Repository from '#src/utils/repository'
 import UserFactory from '#src/factories/user'
 import Snowflake from '#src/utils/snowflake'
 
-const repository = SnowflakeRepository.get()
+const repository = Repository.get()
 beforeEach(() => {
   repository.reset()
 })
 
-describe('SnowflakeRepository', () => {
+describe('Repository', () => {
   describe('#get()', () => {
     it('always returns the same repository', () => {
-      expect(SnowflakeRepository.get()).to.be.equal(repository)
+      expect(Repository.get()).to.be.equal(repository)
     })
   })
 
@@ -75,6 +75,28 @@ describe('SnowflakeRepository', () => {
       repository.add(user)
 
       expect(spy).to.have.been.calledWith(user)
+    })
+  })
+
+  describe('.reset()', () => {
+    let user: ReturnType<typeof UserFactory.build>
+    beforeEach(() => {
+      repository.reset()
+
+      user = UserFactory.build()
+      repository.add(user)
+    })
+
+    it('resets the count', () => {
+      expect(repository.count).to.be.equal(1)
+      repository.reset()
+      expect(repository.count).to.be.equal(0)
+    })
+
+    it('removes objects', () => {
+      expect(repository.fetch(user.id)).to.be.an('object')
+      repository.reset()
+      expect(repository.fetch(user.id)).to.be.equal(null)
     })
   })
 })

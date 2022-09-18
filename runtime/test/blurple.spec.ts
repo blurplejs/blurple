@@ -14,19 +14,16 @@ afterEach(() => {
 })
 
 describe('Blurple', () => {
-  describe('HTTP server', () => {
+  describe('.start()', () => {
     it('listens to HTTP connections', () => {
       const response = axios(`${blurple.httpUrl}/api/users/@me`)
       return expect(response).to.eventually.be.rejectedWith(/status code 401/)
     })
   })
 
-  describe('Authentication', () => {
-    it('can return a valid bot token', async () => {
-      // const token = blurple.repositories.bots.create().token
+  describe('.stop()', () => {
+    it('calls Repository.reset()', () => {
 
-      // const response = await fetch(blurple.HttpUrl)
-      // return expect(response.ok).to.be.true
     })
   })
 })
