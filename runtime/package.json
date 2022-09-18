@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "test": "npm run test:base -- --type-check",
+    "test": "npm run test:base -- --exit --type-check",
     "coverage": "codecov",
     "test:base": "ts-mocha --file test/setup.ts **/*.spec.ts test/**/*.spec.ts",
     "test:report": "nyc npm run --silent test:base -- --exit --reporter json > test-results.json",
@@ -36,6 +36,7 @@
     "@types/ws": "^8.5.3",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
+    "axios": "^0.27.2",
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
     "codecov": "^3.8.3",

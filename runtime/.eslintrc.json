@@ -1,0 +1,18 @@
+{
+  "extends": "standard-with-typescript",
+  "ignorePatterns": ["coverage"],
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+  "rules": {
+    "comma-dangle": ["error", "always-multiline"],
+    "@typescript-eslint/comma-dangle": ["error", "always-multiline"],
+    "@typescript-eslint/restrict-template-expressions": ["error", {
+      "allowAny": true
+    }],
+    "@typescript-eslint/strict-boolean-expressions": ["warn", {
+      "allowAny": true
+    }],
+    "@typescript-eslint/no-non-null-assertion": "warn"
+  }
+}
