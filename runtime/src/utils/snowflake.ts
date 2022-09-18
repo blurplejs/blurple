@@ -1,3 +1,5 @@
+export type snowflake = string
+
 /**
  * @see https://discord.com/developers/docs/reference#snowflakes
  */
@@ -31,9 +33,20 @@ export default class Snowflake {
   }
 
   /**
+   * Creates a new snowflake and only returns its string representation. This will likely
+   * be the main interface to work with Snowflakes, as oftentimes it isn't necessary to
+   * extract any internal information from them.
+   *
+   * @returns the string representation of a new Snowflake
+   */
+  public static create (): string {
+    return (new Snowflake()).toString()
+  }
+
+  /**
    * Generates the descriptor for the Snowflake.
    *
-   * @return A 64-bit integer representing the unique identifier of this Snowflake
+   * @returns A 64-bit integer representing the unique identifier of this Snowflake
    */
   get descriptor (): bigint {
     const value = BigInt(this.increment) +
@@ -47,6 +60,8 @@ export default class Snowflake {
   /**
    * Returns the Snowflake descriptor as a string so that it can be transmitted
    * as a string to clients that might not support 64-bit integers.
+   *
+   * @returns The snowflake descriptor as a string
    */
   public toString (): string {
     return this.descriptor.toString(10)

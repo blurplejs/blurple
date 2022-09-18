@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "test": "npm run test:base -- --exit",
+    "test": "npm run test:base -- --type-check",
     "coverage": "codecov",
-    "test:base": "mocha --file test/setup.ts",
+    "test:base": "ts-mocha --file test/setup.ts **/*.spec.ts test/**/*.spec.ts",
     "test:report": "nyc npm run --silent test:base -- --exit --reporter json > test-results.json",
-    "test:watch": "npm run test:base -- --watch --watch-files test/**/*.ts,src/**/*.ts"
+    "test:watch": "npm run test:base -- -w --watch-files '**/*.ts'"
   },
   "imports": {
-    "#src/*": "./src/*.ts"
+    "#src/*": "./src/*.ts",
+    "#test/*": "./test/*.ts"
   },
   "nyc": {
     "reporter": [
@@ -23,10 +24,16 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@faker-js/faker": "^7.5.0",
     "@types/chai": "^4.3.3",
     "@types/chai-as-promised": "^7.1.5",
+    "@types/koa": "^2.13.5",
+    "@types/koa__router": "^12.0.0",
     "@types/mocha": "^9.1.1",
+    "@types/node": "^18.7.18",
     "@types/sinon": "^10.0.13",
+    "@types/sinon-chai": "^3.2.8",
+    "@types/ws": "^8.5.3",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
     "chai": "^4.3.6",
@@ -42,7 +49,16 @@
     "nyc": "^15.1.0",
     "nyc-report-lcov-absolute": "^1.0.0",
     "sinon": "^14.0.0",
+    "sinon-chai": "^3.7.0",
+    "ts-mocha": "^10.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.8.3"
+  },
+  "dependencies": {
+    "@koa/router": "^12.0.0",
+    "fishery": "^2.2.2",
+    "koa": "^2.13.4",
+    "rxjs": "^7.5.6",
+    "ws": "^8.8.1"
   }
 }

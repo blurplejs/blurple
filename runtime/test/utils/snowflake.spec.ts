@@ -93,4 +93,10 @@ describe('Snowflake', () => {
       expect(snowflake.toString()).to.be.equal('175928847299117063')
     })
   })
+
+  describe('.create()', () => {
+    it('creates a snowflake and returns its string representation', () => {
+      expect(Snowflake.create()).to.be.equal('175928847299121153')
+    })
+  })
 })

@@ -1,0 +1,14 @@
+{
+	"Create a new spec": {
+		"scope": "javascript,typescript",
+		"prefix": "spec",
+		"body": [
+			"import { describe } from 'mocha'",
+			"import { expect } from 'chai'",
+			"",
+			"describe('$1', () => {",
+			"  $2",
+			"})"
+		]
+  }
+}
