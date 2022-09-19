@@ -1,9 +1,9 @@
 import { type snowflake } from './snowflake'
-import { Observable, Subscriber, Subscription } from 'rxjs'
+import { Subject, Subscriber, Subscription } from 'rxjs'
 import Identifiable from '#src/types/identifiable'
 
-export default class Repository extends Observable<Identifiable> {
-  private subscriber: Subscriber<Identifiable>
+export default class Repository extends Subject<Identifiable> {
+  private readonly subscriber: Subscriber<Identifiable>
   private subscription?: Subscription
   private entities: Record<snowflake, Identifiable>
 
@@ -25,9 +25,7 @@ export default class Repository extends Observable<Identifiable> {
    * Instantiates the new repository as an observable and resets its state.
    */
   private constructor () {
-    super((subscriber) => {
-      this.subscriber = subscriber
-    })
+    super()
 
     this.reset()
   }
@@ -61,7 +59,7 @@ export default class Repository extends Observable<Identifiable> {
    * @returns The added object
    */
   public add<T extends Identifiable> (object: T): T {
-    this.subscriber.next(object)
+    this.next(object)
 
     return object
   }

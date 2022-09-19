@@ -2,10 +2,11 @@ import { describe } from 'mocha'
 import { expect } from 'chai'
 import HttpServer from '#src/http/server'
 import { AddressInfo } from 'net'
+import Blurple from '#src/blurple'
 
 describe('HTTP API', () => {
   describe('.address', () => {
-    const server = new HttpServer()
+    const server = new HttpServer(new Blurple())
 
     context('without a running server', () => {
       it('returns null', () => {

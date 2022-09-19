@@ -3,17 +3,17 @@ import { expect } from 'chai'
 import sinon from 'sinon'
 import Snowflake from '#src/utils/snowflake'
 
-let clock: sinon.SinonFakeTimers
-beforeEach(() => {
-  clock = sinon.useFakeTimers({ now: Date.UTC(2016, 3, 30, 11, 18, 25, 796) })
-  Snowflake.INCREMENT_COUNTER = 0
-})
-
-afterEach(() => {
-  clock.restore()
-})
-
 describe('Snowflake', () => {
+  let clock: sinon.SinonFakeTimers
+  beforeEach(() => {
+    clock = sinon.useFakeTimers({ now: Date.UTC(2016, 3, 30, 11, 18, 25, 796) })
+    Snowflake.INCREMENT_COUNTER = 0
+  })
+
+  afterEach(() => {
+    clock.restore()
+  })
+
   it('can be constructed', () => {
     const snowflake = new Snowflake()
     expect(snowflake).to.be.an('object')

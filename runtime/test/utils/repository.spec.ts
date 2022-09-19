@@ -6,9 +6,6 @@ import UserFactory from '#src/factories/user'
 import Snowflake from '#src/utils/snowflake'
 
 const repository = Repository.get()
-beforeEach(() => {
-  repository.reset()
-})
 
 describe('Repository', () => {
   describe('#get()', () => {
