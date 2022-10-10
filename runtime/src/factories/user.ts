@@ -1,6 +1,6 @@
 import defineFactory from './define'
 import { faker } from '@faker-js/faker'
-import User from '../types/user'
+import User from '../resources/user'
 import Snowflake from '#src/utils/snowflake'
 
 export default defineFactory(User, ({ params }) => {

@@ -1,7 +1,7 @@
 import { describe } from 'mocha'
 import { expect } from 'chai'
 import defineFactory from '#src/factories/define'
-import User from '#src/types/user'
+import User from '#src/resources/user'
 import Repository from '#src/utils/repository'
 
 // Define a sample factory that we can use to test the repository
