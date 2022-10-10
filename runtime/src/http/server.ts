@@ -3,6 +3,10 @@ import Router from '@koa/router'
 import { type Server } from 'http'
 import { type AddressInfo } from 'net'
 import Blurple from '#src/blurple'
+import { defineRoutes as defineUserRoutes } from './routes/user'
+import { defineRoutes as defineGuildRoutes } from './routes/guild'
+import { defineRoutes as defineChannelRoutes } from './routes/channel'
+import { defineRoutes as defineVoiceRoutes } from './routes/voice'
 
 export type KoaState = DefaultState
 export interface KoaContext {
@@ -38,9 +42,11 @@ export default class HttpServer {
    */
   private configureRouter (): void {
     const router = new Router()
-    router.get('/api/users/@me', (ctx, next) => {
-      ctx.status = 401
-    })
+
+    router.use('/guilds', defineGuildRoutes().routes())
+      .use('/users', defineUserRoutes().routes())
+      .use('/channels', defineChannelRoutes().routes())
+      .use('/voice', defineVoiceRoutes().routes())
 
     this.app
       .use(router.routes())
