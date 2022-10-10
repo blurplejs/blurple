@@ -3,6 +3,10 @@ import Router from '@koa/router'
 import { type Server } from 'http'
 import { type AddressInfo } from 'net'
 import Blurple from '#src/blurple'
+import { defineRoutes as defineUserRoutes } from './routes/user'
+import { defineRoutes as defineGuildRoutes } from './routes/guild'
+import { defineRoutes as defineChannelRoutes } from './routes/channel'
+import { defineRoutes as defineVoiceRoutes } from './routes/voice'
 
 export type KoaState = DefaultState
 export interface KoaContext {
@@ -37,14 +41,27 @@ export default class HttpServer {
    * Configure the routes available for our Koa HTTP server.
    */
   private configureRouter (): void {
-    const router = new Router()
-    router.get('/api/users/@me', (ctx, next) => {
-      ctx.status = 401
+    const apiRoots = {
+      guilds: defineGuildRoutes,
+      users: defineUserRoutes,
+      channels: defineChannelRoutes,
+      voice: defineVoiceRoutes,
+    }
+
+    // Define all API endpoints on the API router
+    const apiRouter = new Router()
+    Object.keys(apiRoots).forEach((key) => {
+      const router = apiRoots[key]()
+      apiRouter.use(`/${key}`, router.routes(), router.allowedMethods())
     })
 
+    // Add the API router to the base router for versioning purposes
+    const baseRouter = new Router()
+    baseRouter.use('/api', apiRouter.routes(), apiRouter.allowedMethods())
+
     this.app
-      .use(router.routes())
-      .use(router.allowedMethods())
+      .use(baseRouter.routes())
+      .use(baseRouter.allowedMethods())
   }
 
   /**
