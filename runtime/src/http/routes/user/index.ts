@@ -3,7 +3,7 @@ import Router from '@koa/router'
 export function defineRoutes (): Router {
   const router = new Router()
 
-  router.get('/@me', () => {})
+  router.get('/@me', (ctx, next) => { ctx.status = 401 })
   router.patch('/@me', () => {})
   router.get('/:id', () => {})
 

@@ -41,16 +41,27 @@ export default class HttpServer {
    * Configure the routes available for our Koa HTTP server.
    */
   private configureRouter (): void {
-    const router = new Router()
+    const apiRoots = {
+      guilds: defineGuildRoutes,
+      users: defineUserRoutes,
+      channels: defineChannelRoutes,
+      voice: defineVoiceRoutes,
+    }
 
-    router.use('/guilds', defineGuildRoutes().routes())
-      .use('/users', defineUserRoutes().routes())
-      .use('/channels', defineChannelRoutes().routes())
-      .use('/voice', defineVoiceRoutes().routes())
+    // Define all API endpoints on the API router
+    const apiRouter = new Router()
+    Object.keys(apiRoots).forEach((key) => {
+      const router = apiRoots[key]()
+      apiRouter.use(`/${key}`, router.routes(), router.allowedMethods())
+    })
+
+    // Add the API router to the base router for versioning purposes
+    const baseRouter = new Router()
+    baseRouter.use('/api', apiRouter.routes(), apiRouter.allowedMethods())
 
     this.app
-      .use(router.routes())
-      .use(router.allowedMethods())
+      .use(baseRouter.routes())
+      .use(baseRouter.allowedMethods())
   }
 
   /**
