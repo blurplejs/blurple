@@ -1,5 +1,5 @@
 import { snowflake } from '#src/utils/snowflake'
-import Identifiable from './identifiable'
+import Identifiable from '../types/identifiable'
 
 /**
  * @see https://discord.com/developers/docs/resources/emoji

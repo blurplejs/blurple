@@ -1,6 +1,6 @@
 import { snowflake } from '#src/utils/snowflake'
 import { faker } from '@faker-js/faker'
-import Identifiable from './identifiable'
+import Identifiable from '../types/identifiable'
 
 /**
  * @see https://discord.com/developers/docs/resources/user#user-object-user-flags

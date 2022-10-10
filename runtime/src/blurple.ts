@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs'
 import HttpServer from './http/server'
-import User from './types/user'
+import User from './resources/user'
 import Repository from './utils/repository'
 import { snowflake } from './utils/snowflake'
 
