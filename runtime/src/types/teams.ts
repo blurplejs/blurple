@@ -1,5 +1,4 @@
 import { snowflake } from '#src/utils/snowflake'
-import Identifiable from './identifiable'
 
 /**
  * @see https://discord.com/developers/docs/topics/teams#data-models-team-member-object

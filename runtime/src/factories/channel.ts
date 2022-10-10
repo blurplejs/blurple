@@ -1,5 +1,5 @@
 import defineFactory from './define'
-import Channel from '../types/channel'
+import Channel from '../resources/channel'
 
 export default defineFactory(Channel, ({ sequence }) => {
   return {}
